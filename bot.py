@@ -7,5 +7,12 @@ auth.set_access_token("2427185198-0liiBHYMUc9vwmjYwkckw2ZNy7Gu2yzGId0XcQO", "Ri9
 # Create API object
 api = tweepy.API(auth)
 
+#Handling Errors while verifying credentials
+try:
+    api.verify_credentials()
+    print("Authetication Successful")
+except:
+    print("Authentication Failure")
+
 # Create a Test tweet
 api.update_status("Test Tweet for Bot")
