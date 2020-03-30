@@ -19,8 +19,11 @@ except:
 #api.update_status("Test Tweet for Bot")
 
 #Retweet for #DevOps 
-for tweet in tweepy.Cursor(api.search,q='#DevOps').items(3):
-    print("\n RT by Bot")
-    tweet.retweet()
-    print("RT Success!")
-    time.sleep(5) #sleep for 5 seconds before next RT
+for tweet in tweepy.Cursor(api.search,q='#DevOpsatUPES'):
+    try:
+        print("\n RT by Bot")
+        tweet.retweet()
+        print("RT Success!")
+        time.sleep(5) #sleep for 5 seconds before next RT
+    except:
+        print("RT Failed!")
