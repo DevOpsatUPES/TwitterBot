@@ -5,7 +5,7 @@ A simple Twitter Tweet, Retweet, Like and Follow bot for #DevOpsatUPES #100Dayso
 
 It is an open source project led by students of DevOps specialization at University of Petroleum and Energy Studies. 
 
-Feel free to collaborate by followingt these [guidelines](CONTRIBUTING.md).
+Feel free to collaborate by following these [guidelines](CONTRIBUTING.md).
 
 ## License
 
