@@ -23,7 +23,9 @@ except:
     print("Authentication Failure")
 
 # Making an infinite loop to iterate over the process of retweeting
-while True: 
+while True:
+    # Waiting for some time so that twitter limit doesn't get exceeded
+    time.sleep(150)
     for tweet in api.search(q='#DevOpsatUPES', rpp=15):
     # Checking for tweets containing the hashtag 100DaysOfCodeatUPES
         try:
@@ -35,8 +37,6 @@ while True:
             api.create_favorite(tweet.id)
             # Liking the tweet
             print("Retweet Succesfull")
-            # Waiting for two seconds for the next tweet
-            time.sleep(2)
         except:
             # Executes in case no post was found
             print("Retweet failed")
