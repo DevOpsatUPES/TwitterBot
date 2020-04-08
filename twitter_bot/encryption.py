@@ -1,19 +1,25 @@
+# Importing python libraries
 import Crypto
 from Crypto.PublicKey import RSA
 from Crypto import Random
 import json
 
+# Empty variables for the authorization keys
 CONSUMER_KEY = ""
 CONSUMER_SECRET = ""
 ACCESS_KEY = ""
 ACCESS_SECRET = ""
 
+# Generating public and private keys for RSA and storing the private key in a file
 random_generator = Random.new().read
 KEY = RSA.generate(1024, random_generator)
 with open ("private.pem", "w") as prv_file:
     prv_file.write(str(KEY.exportKey(format='PEM')))
 
 def loadKeys():
+    """
+    Used to load the provided twitter API keys from a given file into the script
+    """
     global CONSUMER_KEY
     global CONSUMER_SECRET
     global ACCESS_KEY
@@ -30,9 +36,19 @@ def loadKeys():
         print("Loading keys failed")
 
 def strToBinary(str):
+    """
+    Converts a given key from a character string to a binary string
+
+
+    Arguments : str
+    * str - accepts the character string to be converted
+    """
     return (" ".join(f"{ord(i):b}" for i in str))
 
 def convertToBinary():
+    """
+    Converts the given twitter API keys using the strToBinary function
+    """
     global CONSUMER_KEY
     global CONSUMER_SECRET
     global ACCESS_KEY
@@ -43,12 +59,22 @@ def convertToBinary():
     ACCESS_SECRET = strToBinary(ACCESS_SECRET)
 
 def encrypt(message):
+    """
+    Encrypts a given binary string using the public key of the RSA Algorithm 
+
+
+    Arguments : message
+    * message - accepts the message to be encrypted
+    """
     global KEY
     publickey = KEY.publickey()
     encrypted = publickey.encrypt(message, 32)
     return encrypted[0]
 
 def encryptKeys():
+    """
+    Encrypts the keys using the encrypt function and store the encrypted keys in seperate files
+    """
     global CONSUMER_KEY
     global CONSUMER_SECRET
     global ACCESS_KEY
