@@ -1,3 +1,4 @@
+# Importing python libraries
 import Crypto
 from Crypto.PublicKey import RSA
 from Crypto import Random
@@ -5,28 +6,41 @@ import json
 import tweepy
 import time
 
+# Empty variables for the authorization keys
 CONSUMER_KEY = ""
 CONSUMER_SECRET = ""
 ACCESS_KEY = ""
 ACCESS_SECRET = ""
 
+# Empty variable for loading private key of RSA
 KEY = ""
 
+# Loading the private key of RSA algorithm
 with open('private.pem', mode='r') as f:
     KEY = f.readlines()[0]
 
+# Converting the private key to the desired format and loading it
 KEY = KEY[2:-1]
 KEY = str(KEY)
 KEY = KEY.replace('\\n', '\n')
 KEY = RSA.importKey(KEY)
 
 def decrypt(encrypted):
+    """
+    Accepts the message to be decrypted and decrypts it using the private key
+
+    Arguments : encrypted
+    * encrypted - accepts the message to be decrypted
+    """
     global KEY
     decrypted = f"{KEY.decrypt(encrypted):08}"
     # print(decrypted)
     return decrypted
 
 def decryptKeys():
+    """
+    Reads the encrypted messages from the files and decrypt them using the decrypt function and converts the encrypted message to the binary string
+    """
     global CONSUMER_KEY
     global CONSUMER_SECRET
     global ACCESS_KEY
@@ -58,10 +72,22 @@ def decryptKeys():
 
 
 def BinaryToDecimal(binary):
+    """
+    Converts the given binary string to the decimal string
+
+    Arguments : binary
+    * binary - accepts the binary string
+    """
     string = int(binary, 2)
     return string  	
 
 def convert(bin_data):
+    """
+    Converts the binary string to decimal string using the BinaryToDecimal function and then converts the decimal string further to character string
+    
+    Arguments : bin_data
+    * bin_data - accepts the binary string
+    """
     str_data =''
     for i in range(0, len(bin_data), 8):
         temp_data = bin_data[i:i + 8]
@@ -69,6 +95,7 @@ def convert(bin_data):
         str_data = str_data + chr(decimal_data) 
     return str_data
 
+# Decrypting the keys
 decryptKeys()
 
 # Twitter API keys
